@@ -1,25 +1,41 @@
-# README
+## フォームオブジェクトを使い一括登録フォームを実装する
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- 商品コード
+- 商品名
+- 価格
+これらを最大5件登録できるフォームを作成してください。
+チェックボックスを入れたものだけ登録される仕組みです。
 
-Things you may want to cover:
+ #### モデルを作成
+```
+rails g model product
+```
 
-* Ruby version
+```
+  def change
+    create_table :products do |t|
+      t.string  :code,          null: false
+      t.string  :name,          null: false
+      t.integer :price,         null: false
+      t.timestamps
+    end
+  end
+```
 
-* System dependencies
 
-* Configuration
+ ### コントローラー
+```
+rails g controller products index new 
+```
 
-* Database creation
+## form object 準備
+https://github.com/nishio-dens/rails-application-build-guide-sample/tree/master/form/bulk_registration_form_example/app/models
 
-* Database initialization
 
-* How to run the test suite
+一括登録画面では最大5件までの商品が登録可能であること
+以下条件を満たす商品のみ登録可能とする
+登録チェックボックスにチェックがある商品のみ登録可能とする
+チェックのない商品のバリデーションはスキップすること
+各種バリデーションが通っている商品のみ登録可能とする
+バリデーションを満たしていない場合はエラーメッセージを表示すること
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# form-object-app2
