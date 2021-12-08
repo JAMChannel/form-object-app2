@@ -1,2 +1,29 @@
-<h1>Products#new</h1>
-<p>Find me in app/views/products/new.html.erb</p>
+<p><%= link_to "一覧へ", root_path %></p>
+
+<%= render 'errors', form: @form %>
+
+<%= form_with model:@form, url: products_path, local:true do |form| %>
+  <table>
+    <thead>
+      <tr>
+        <th width="60px">登録</th>
+        <th>商品コード</th>
+        <th>商品名</th>
+        <th>販売価格</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= form.fields_for :products do |f| %>
+        <tr>
+          <td><%= f.check_box :register %></td>
+          <td><%= f.text_field :code %></td>
+          <td><%= f.text_field :name %></td>
+          <td><%= f.text_field :price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= form.submit '一括登録' %>
+  </div>
+<% end %>
